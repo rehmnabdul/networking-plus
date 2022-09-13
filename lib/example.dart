@@ -2,6 +2,22 @@
 import 'package:networking_plus/api_response.dart';
 import 'package:networking_plus/networking_plus.dart';
 
+class MockUser{
+  late String? fullName;
+
+  MockUser({this.fullName});
+
+  MockUser.fromJson(Map<String, dynamic> json) {
+    fullName = json['fullName'];
+  }
+
+  toJson(){
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['fullName'] = fullName;
+    return data;
+  }
+}
+
 main() async {
 
   //Optional: Set base URL in start
@@ -21,25 +37,25 @@ main() async {
   };
 
   //GET Request
-  var result = await Networking.get(endPoint, query: queryParameters, headers: headers);
+  var getResult = await Networking.get(endPoint, query: queryParameters, headers: headers);
 
   // POST Request
-  //var user = MockUser();
-  //var result = await Networking.post(endPoint, query: queryParameters, headers: headers, body: user.toJson());
+  var user = MockUser();
+  var postResult = await Networking.post(endPoint, query: queryParameters, headers: headers, body: user.toJson());
 
-  if(result is Success) {
+  if(postResult is Success) {
 
-    var body = result.response;
+    var body = postResult.response;
 
     //If the response is an object
-    //var desiredObject = MyObject.fromJson(body);
+    var desiredObject = MockUser.fromJson(body);
 
     //If the response is a list od objects
-    //var resultList = result as List;
-    //var itemList: List<MyObject> = resultList.map((e) => MyObject.fromJson(e));
+    var resultList = postResult as List;
+    var itemList= resultList.map((e) => MockUser.fromJson(e));
 
   } else {
-    var error = result as Error;
+    var error = postResult as Error;
     var errorCode = error.code;
     var errorMessage = error.message;
   }
