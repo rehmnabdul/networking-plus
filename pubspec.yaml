@@ -1,6 +1,6 @@
 name: networking_plus
 description: A Flutter Library for calling rest APIs very easily and get rid of a lots of boiler plate code base.
-version: 0.0.1
+version: 0.0.2
 homepage: https://github.com/rehmnabdul/networking-plus
 
 environment:
