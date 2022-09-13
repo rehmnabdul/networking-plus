@@ -24,19 +24,19 @@ main() async {
   var result = await Networking.get(endPoint, query: queryParameters, headers: headers);
 
   // POST Request
-  var user = MockUser();
-  var result = await Networking.post(endPoint, query: queryParameters, headers: headers, body: user.toJson());
+  //var user = MockUser();
+  //var result = await Networking.post(endPoint, query: queryParameters, headers: headers, body: user.toJson());
 
   if(result is Success) {
 
     var body = result.response;
 
     //If the response is an object
-    var desiredObject = MyObject.fromJson(body);
+    //var desiredObject = MyObject.fromJson(body);
 
     //If the response is a list od objects
-    var resultList = result as List;
-    var itemList: List<MyObject> = resultList.map((e) => MyObject.fromJson(e));
+    //var resultList = result as List;
+    //var itemList: List<MyObject> = resultList.map((e) => MyObject.fromJson(e));
 
   } else {
     var error = result as Error;
